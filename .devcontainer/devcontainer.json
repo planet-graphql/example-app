@@ -1,0 +1,39 @@
+{
+  "name": "@planet-graphql/example-app",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/app",
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "prisma.prisma",
+    "graphql.vscode-graphql"
+  ],
+  "settings": {
+    // remote-container
+    "remote.containers.copyGitConfig": false,
+    "remote.containers.gitCredentialHelperConfigLocation": "none",
+    // general
+    "editor.insertSpaces": true,
+    "editor.rulers": [90],
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    // typescript / javascript
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.configPath": "./.prettierrc.json",
+    "prettier.prettierPath": "./node_modules/prettier",
+    "eslint.workingDirectories": [{ "mode": "auto" }],
+    "[typescript]": {
+      "editor.codeActionsOnSave": ["source.fixAll.eslint"]
+    },
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "javascript": {
+      "editor.codeActionsOnSave": ["source.fixAll.eslint"]
+    },
+    // prisma
+    "[prisma]": {
+      "editor.defaultFormatter": "Prisma.prisma"
+    }
+  },
+  "postCreateCommand": "cd /app/server && yarn"
+}
