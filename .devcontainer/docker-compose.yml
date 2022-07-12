@@ -18,11 +18,11 @@ services:
     tty: true
   server:
     build:
-      context: ../server
+      context: ../src
       dockerfile: Dockerfile
     env_file:
       - .env
-    working_dir: /app/server/
+    working_dir: /app/src/
     volumes:
       - app:/app
     ports:
