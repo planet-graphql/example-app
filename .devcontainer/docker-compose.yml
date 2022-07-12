@@ -27,7 +27,7 @@ services:
       - app:/app
     ports:
       - 30001:3000
-    command: yarn dev:app
+    command: yarn dev
   db:
     image: postgres:14
     env_file:
