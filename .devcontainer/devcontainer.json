@@ -35,5 +35,5 @@
       "editor.defaultFormatter": "Prisma.prisma"
     }
   },
-  "postCreateCommand": "cd /app/server && yarn"
+  "postCreateCommand": "cd /app/src && yarn"
 }
