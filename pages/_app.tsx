@@ -12,9 +12,11 @@ export const ThemeProvider = Primer.ThemeProvider as React.FC<ThemeProviderProps
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <Primer.SSRProvider>
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </Primer.SSRProvider>
   )
 }
 
