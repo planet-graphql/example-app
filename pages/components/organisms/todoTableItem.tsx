@@ -13,6 +13,7 @@ type Props = {
     todaysAction: boolean
     status: TodoStatus
   }
+  onCheck: (id: number, isChecked: boolean) => void
   onClick: (id: number) => void
 }
 
@@ -38,10 +39,8 @@ function TodoTableItem(props: Props) {
     >
       <Primer.Box flex="0 0 auto">
         <Primer.Checkbox
-          onChange={
-            // TODO: implement onCheck.
-            () => console.log('onCheck')
-          }
+          value={props.formValue.id.toString()}
+          onChange={(e) => props.onCheck(props.formValue.id, e.target.checked)}
         />
       </Primer.Box>
       <Primer.Box
