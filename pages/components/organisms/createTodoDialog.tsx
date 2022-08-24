@@ -1,13 +1,13 @@
 import React from 'react'
 import * as Primer from '@primer/react'
-import CreateContentForm from './CreateContent'
+import CreateTodoContentForm from './createTodoContentForm'
 import { FormValue } from '../../../lib/tokens'
 
 type Props = {
   onCreate: (formValue: FormValue) => void
 }
 
-function NewTodo(props: Props) {
+function CreateTodoDialog(props: Props) {
   const returnFocusRef = React.useRef(null)
   const [isOpen, setIsOpen] = React.useState(false)
 
@@ -26,7 +26,7 @@ function NewTodo(props: Props) {
       >
         <Primer.Dialog.Header id="header-id">new Todo</Primer.Dialog.Header>
         <Primer.Box p={3}>
-          <CreateContentForm
+          <CreateTodoContentForm
             formValue={{
               title: '',
               content: '',
@@ -37,11 +37,11 @@ function NewTodo(props: Props) {
               status: 'New',
             }}
             onCreate={(value) => props.onCreate(value)}
-          ></CreateContentForm>
+          ></CreateTodoContentForm>
         </Primer.Box>
       </Primer.Dialog>
     </Primer.Box>
   )
 }
 
-export default NewTodo
+export default CreateTodoDialog

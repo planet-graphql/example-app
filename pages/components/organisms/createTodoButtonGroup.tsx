@@ -5,7 +5,7 @@ type Props = {
   onCreate: () => void
 }
 
-function CreateButtonGroup(props: Props) {
+function CreateTodoButtonGroup(props: Props) {
   return (
     <Primer.Box aria-label="edit" display="flex" sx={{ gap: '2px' }}>
       <Primer.Box flexGrow={1}></Primer.Box>
@@ -16,4 +16,4 @@ function CreateButtonGroup(props: Props) {
   )
 }
 
-export default CreateButtonGroup
+export default CreateTodoButtonGroup
