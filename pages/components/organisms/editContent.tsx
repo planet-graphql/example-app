@@ -4,9 +4,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { ReactFCWrapper } from '../../_app'
 import EditButtonGroup from './editButtonGroup'
-
-const todoStatus = ['New', 'InProgress', 'Done', 'Pending'] as const
-type TodoStatus = typeof todoStatus[number]
+import { todoStatus, TodoStatus } from '../../../lib/tokens'
 
 type FormValue = {
   title: string
@@ -25,12 +23,12 @@ type Props = {
   onCancel: () => void
 }
 
-type EditRowProps = {
+type RowProps = {
   item: string
   children: React.ReactNode
 }
 
-function Row(props: EditRowProps) {
+function Row(props: RowProps) {
   return (
     <Primer.Box
       display="flex"
