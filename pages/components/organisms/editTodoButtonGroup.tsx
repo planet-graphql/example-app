@@ -7,7 +7,7 @@ type Props = {
   onCancel: () => void
 }
 
-function EditButtonGroup(props: Props) {
+function EditTodoButtonGroup(props: Props) {
   return (
     <Primer.Box aria-label="edit" display="flex" sx={{ gap: '2px' }}>
       <Primer.Box onClick={props.onDelete}>
@@ -24,4 +24,4 @@ function EditButtonGroup(props: Props) {
   )
 }
 
-export default EditButtonGroup
+export default EditTodoButtonGroup

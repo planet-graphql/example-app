@@ -1,26 +1,14 @@
 import React from 'react'
 import * as Primer from '@primer/react'
+import { FormValue, TodoStatus, todoStatus } from '../../../lib/tokens'
+import CreateTodoButtonGroup from './createTodoButtonGroup'
+import { ReactFCWrapper } from '../../_app'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { ReactFCWrapper } from '../../_app'
-import EditButtonGroup from './editButtonGroup'
-import { todoStatus, TodoStatus } from '../../../lib/tokens'
-
-type FormValue = {
-  title: string
-  content: string
-  note: string
-  counterParty: string
-  deadline: Date
-  todaysAction: boolean
-  status: TodoStatus
-}
 
 type Props = {
   formValue: FormValue
-  onUpdate: (args: FormValue) => void
-  onDelete: () => void
-  onCancel: () => void
+  onCreate: (args: FormValue) => void
 }
 
 type RowProps = {
@@ -46,7 +34,7 @@ function Row(props: RowProps) {
   )
 }
 
-function EditContentForm(props: Props) {
+function CreateTodoContentForm(props: Props) {
   const FormControlLabel = Primer.FormControl.Label as ReactFCWrapper<
     typeof Primer.FormControl.Label
   >
@@ -185,14 +173,12 @@ function EditContentForm(props: Props) {
         </Primer.FormControl>
       </Row>
       <Primer.Box py={3}>
-        <EditButtonGroup
-          onUpdate={() => props.onUpdate(formValue)}
-          onDelete={() => props.onDelete()}
-          onCancel={() => props.onCancel()}
-        ></EditButtonGroup>
+        <CreateTodoButtonGroup
+          onCreate={() => props.onCreate(formValue)}
+        ></CreateTodoButtonGroup>
       </Primer.Box>
     </Primer.Box>
   )
 }
 
-export default EditContentForm
+export default CreateTodoContentForm
