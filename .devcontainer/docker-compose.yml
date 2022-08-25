@@ -18,16 +18,16 @@ services:
     tty: true
   server:
     build:
-      context: ../src
+      context: ..
       dockerfile: Dockerfile
     env_file:
       - .env
-    working_dir: /app/src/
+    working_dir: /app
     volumes:
       - app:/app
     ports:
       - 30001:3000
-    command: yarn dev
+    command: npm run dev
   db:
     image: postgres:14
     env_file:

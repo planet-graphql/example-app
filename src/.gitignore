@@ -33,6 +33,3 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-
-# other
-.devcontainer/git-credential-github-token
