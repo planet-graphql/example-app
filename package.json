@@ -9,14 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@graphql-yoga/node": "^2.13.11",
+    "@planet-graphql/core": "^0.1.7",
     "@primer/react": "35.5.0",
+    "@prisma/client": "^4.3.0",
     "date-fns": "2.29.1",
     "lodash": "4.17.21",
     "next": "12.2.2",
     "react": "18.2.0",
     "react-datepicker": "4.8.0",
     "react-dom": "18.2.0",
-    "styled-components": "5.3.5"
+    "styled-components": "5.3.5",
+    "supertokens-auth-react": "^0.24.6",
+    "supertokens-node": "^11.1.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.183",

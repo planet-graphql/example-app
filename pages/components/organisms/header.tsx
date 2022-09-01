@@ -4,6 +4,7 @@ import * as Primer from '@primer/react'
 type Props = {
   topPath: string
   logOutPath: string
+  onLogout: () => void
 }
 
 function Header(props: Props) {
@@ -13,9 +14,9 @@ function Header(props: Props) {
       <Primer.Header.Link href={props.topPath} sx={{ fontSize: 24 }}>
         ToDo
       </Primer.Header.Link>
-      <Primer.Header.Link href={props.logOutPath}>
+      <Primer.Header.Item onClick={() => props.onLogout()}>
         <Primer.Button size="large">LogOut</Primer.Button>
-      </Primer.Header.Link>
+      </Primer.Header.Item>
     </Primer.Header>
   )
 }
