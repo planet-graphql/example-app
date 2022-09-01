@@ -35,5 +35,5 @@
       "editor.defaultFormatter": "Prisma.prisma"
     }
   },
-  "postCreateCommand": "cd /app/src && yarn"
+  "postCreateCommand": "cd /app && npm install --force"
 }
