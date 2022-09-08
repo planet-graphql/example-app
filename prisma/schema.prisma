@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator pg {
+  provider = "planet-graphql"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Todo {
+  id           Int        @id @default(autoincrement())
+  userId       String
+  title        String
+  content      String
+  note         String
+  counterParty String
+  deadline     DateTime
+  status       TodoStatus
+  todaysAction Boolean
+  updatedAt    DateTime   @updatedAt
+  createdAt    DateTime   @default(now())
+}
+
+enum TodoStatus {
+  New
+  InProgress
+  Done
+  Pending
+}
