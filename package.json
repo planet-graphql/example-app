@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@graphql-yoga/node": "^2.13.11",
     "@planet-graphql/core": "^0.1.7",
     "@primer/react": "35.5.0",
