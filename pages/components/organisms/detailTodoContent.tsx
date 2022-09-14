@@ -1,7 +1,6 @@
 import React from 'react'
 import * as Primer from '@primer/react'
 import { format } from 'date-fns'
-import { TodoStatus } from '@prisma/client'
 import DetailTodoButtonGroup from './detailTodoButtonGroup'
 import { FormValue } from '../../../lib/tokens'
 

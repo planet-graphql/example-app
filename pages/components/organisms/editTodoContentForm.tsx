@@ -4,17 +4,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { ReactFCWrapper } from '../../_app'
 import EditTodoButtonGroup from './editTodoButtonGroup'
-import { todoStatus, TodoStatus } from '../../../lib/tokens'
-
-type FormValue = {
-  title: string
-  content: string
-  note: string
-  counterParty: string
-  deadline: Date
-  todaysAction: boolean
-  status: TodoStatus
-}
+import { FormValue, todoStatus, TodoStatus } from '../../../lib/tokens'
 
 type Props = {
   formValue: FormValue
@@ -128,7 +118,7 @@ function EditTodoContentForm(props: Props) {
           <Primer.FormControl>
             <FormControlLabel visuallyHidden>Deadline</FormControlLabel>
             <DatePicker
-              selected={formValue.deadline}
+              selected={new Date(formValue.deadline)}
               onChange={(deadline) => {
                 if (deadline !== null)
                   setFormValue({
