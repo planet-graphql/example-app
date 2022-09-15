@@ -35,7 +35,7 @@ function Edit() {
           'title',
           'content',
           'note',
-          'counterParty',
+          'counterparty',
           'deadline',
           'todaysAction',
           'status',

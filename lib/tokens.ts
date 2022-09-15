@@ -5,7 +5,7 @@ export type FormValue = {
   title: string
   content: string
   note: string
-  counterParty: string
+  counterparty: string
   deadline: Date
   todaysAction: boolean
   status: TodoStatus

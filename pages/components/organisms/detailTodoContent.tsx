@@ -40,7 +40,7 @@ function DetailTodoContent(props: Props) {
       <Row title="Title">{props.values.title}</Row>
       <Row title="Content">{props.values.content}</Row>
       <Row title="Note">{props.values.note}</Row>
-      <Row title="CounterParty">{props.values.counterParty}</Row>
+      <Row title="Counterparty">{props.values.counterparty}</Row>
       <Primer.Box
         display="flex"
         borderColor="border.default"
