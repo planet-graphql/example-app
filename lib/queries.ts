@@ -7,7 +7,7 @@ export type QueryTodoResponse = {
     title: string
     content: string
     note: string
-    counterParty: string
+    counterparty: string
     deadline: Date
     todaysAction: boolean
     status: TodoStatus
@@ -21,7 +21,7 @@ export const QueryTodo = gql`
       title
       content
       note
-      counterParty
+      counterparty
       deadline
       todaysAction
       status
@@ -35,7 +35,7 @@ export type MutationUpdateTodoResponse = {
     title: string
     content: string
     note: string
-    counterParty: string
+    counterparty: string
     deadline: Date
     todaysAction: boolean
     status: TodoStatus
@@ -49,7 +49,7 @@ export const MutationUpdateTodo = gql`
       title
       content
       note
-      counterParty
+      counterparty
       deadline
       todaysAction
       status
@@ -63,7 +63,7 @@ export type MutationDeleteTodoResponse = {
     title: string
     content: string
     note: string
-    counterParty: string
+    counterparty: string
     deadline: Date
     todaysAction: boolean
     status: TodoStatus
@@ -77,7 +77,7 @@ export const MutationDeleteTodo = gql`
       title
       content
       note
-      counterParty
+      counterparty
       deadline
       todaysAction
       status

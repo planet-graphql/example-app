@@ -86,14 +86,14 @@ function EditTodoContentForm(props: Props) {
           }}
         ></Primer.Textarea>
       </Row>
-      <Row item="CounterParty">
+      <Row item="Counterparty">
         <Primer.TextInput
           block
-          defaultValue={props.formValue.counterParty}
+          defaultValue={props.formValue.counterparty}
           onChange={(e) => {
             setFormValue({
               ...formValue,
-              counterParty: e.target.value,
+              counterparty: e.target.value,
             })
           }}
         />

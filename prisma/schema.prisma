@@ -20,7 +20,7 @@ model Todo {
   title        String
   content      String
   note         String
-  counterParty String
+  counterparty String
   deadline     DateTime
   status       TodoStatus
   todaysAction Boolean

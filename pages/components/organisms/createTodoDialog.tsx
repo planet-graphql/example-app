@@ -31,7 +31,7 @@ function CreateTodoDialog(props: Props) {
               title: '',
               content: '',
               note: '',
-              counterParty: '',
+              counterparty: '',
               deadline: new Date(),
               todaysAction: false,
               status: 'New',
