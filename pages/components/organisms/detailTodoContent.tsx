@@ -37,7 +37,9 @@ function Row(props: RowProps) {
 function DetailTodoContent(props: Props) {
   return (
     <Primer.Box borderColor="border.default">
-      <Row title="Title">{props.values.title}</Row>
+      <Row title="Title">
+        {props.values.title.trim() !== '' ? props.values.title : '(no title)'}
+      </Row>
       <Row title="Content">{props.values.content}</Row>
       <Row title="Note">{props.values.note}</Row>
       <Row title="Counterparty">{props.values.counterparty}</Row>

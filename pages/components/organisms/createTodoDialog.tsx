@@ -13,8 +13,12 @@ function CreateTodoDialog(props: Props) {
 
   return (
     <Primer.Box>
-      <Primer.Button ref={returnFocusRef} onClick={() => setIsOpen(true)}>
-        NewTodo
+      <Primer.Button
+        ref={returnFocusRef}
+        onClick={() => setIsOpen(true)}
+        variant="outline"
+      >
+        New
       </Primer.Button>
       <Primer.Dialog
         returnFocusRef={returnFocusRef}
@@ -36,7 +40,10 @@ function CreateTodoDialog(props: Props) {
               todaysAction: false,
               status: 'New',
             }}
-            onCreate={(value) => props.onCreate(value)}
+            onCreate={(value) => {
+              props.onCreate(value)
+              setIsOpen(false)
+            }}
           ></CreateTodoContentForm>
         </Primer.Box>
       </Primer.Dialog>

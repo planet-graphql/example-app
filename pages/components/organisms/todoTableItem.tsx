@@ -94,7 +94,7 @@ function TodoTableItem(props: Props) {
                 cursor: 'pointer',
               }}
             >
-              {props.formValue.title}
+              {props.formValue.title.trim() !== '' ? props.formValue.title : '(no title)'}
             </Primer.Text>
           </Primer.Box>
           <Primer.Box
