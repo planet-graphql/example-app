@@ -39,10 +39,17 @@ export const todosQuery = pg.query({
         args.findManyTodo
           .edit((f) => ({
             where: f.where.edit((f) => ({
-              status: f.status.select('TodoStatus'),
-              deadline: f.deadline,
-              counterparty: f.counterparty,
-              todaysAction: f.todaysAction,
+              status: f.status.select('EnumTodoStatusFilter').edit((f) => ({
+                in: f.in,
+              })),
+              deadline: f.deadline.select('DateTimeFilter').edit((f) => ({
+                gte: f.gte,
+                lte: f.lte,
+              })),
+              counterparty: f.counterparty.select('StringFilter').edit((f) => ({
+                contains: f.contains,
+              })),
+              todaysAction: f.todaysAction.select('Boolean'),
             })),
           }))
           .build(),

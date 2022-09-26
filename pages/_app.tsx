@@ -6,6 +6,7 @@ import Session from 'supertokens-auth-react/recipe/session'
 import { redirectToAuth } from 'supertokens-auth-react/recipe/thirdparty'
 import * as SuperTokensConfig from '../config/frontendConfig'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { useRouter } from 'next/router'
 
 export type ReactFCWrapper<T> = T extends React.FC<infer U>
   ? React.FC<U & { children?: React.ReactNode }>
@@ -26,6 +27,7 @@ export const client = new ApolloClient({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
   React.useEffect(() => {
     async function doRefresh() {
       if (pageProps.fromSupertokens === 'needs-refresh') {
@@ -44,15 +46,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <ApolloProvider client={client}>
-      <SuperTokensWrapper>
+    <SuperTokensWrapper
+      onSessionExpired={() => {
+        router.push('/')
+      }}
+    >
+      <ApolloProvider client={client}>
         <Primer.SSRProvider>
           <ThemeProvider>
             <Component {...pageProps} />
           </ThemeProvider>
         </Primer.SSRProvider>
-      </SuperTokensWrapper>
-    </ApolloProvider>
+      </ApolloProvider>
+    </SuperTokensWrapper>
   )
 }
 

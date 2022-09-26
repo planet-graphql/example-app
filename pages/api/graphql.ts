@@ -16,6 +16,7 @@ import {
   updateManyTodoMutation,
   updateTodoMutation,
 } from '../../graphql/resolver/todo-resolver'
+import ThirdParty from 'supertokens-node/recipe/thirdparty'
 
 export type Context = {
   userId: string
@@ -39,9 +40,10 @@ const server = createServer<{ req: SessionRequest; res: Response }>({
     deleteManyTodoMutation,
   ]),
   maskedErrors: false,
-  context: ({ req }) => {
+  context: async ({ req }) => {
+    const userId = req.session?.getUserId()
     return {
-      userId: req.session?.getUserId(),
+      userId: (await ThirdParty.getUserById(userId ?? ''))?.thirdParty.userId,
       prisma,
     }
   },

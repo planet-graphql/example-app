@@ -10,3 +10,19 @@ export type FormValue = {
   todaysAction: boolean
   status: TodoStatus
 }
+
+export type TypeOfTodoFilter = {
+  todaysAction?: boolean | undefined
+  counterparty?: {
+    contains: string
+  }
+  deadline?:
+    | {
+        gte: Date
+        lte: Date
+      }
+    | undefined
+  status?: {
+    in: string[]
+  }
+}

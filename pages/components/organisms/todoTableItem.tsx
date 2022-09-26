@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as Primer from '@primer/react'
 import { format } from 'date-fns'
 import { TodoStatus } from '../../../lib/tokens'
 
 type Props = {
   formValue: {
-    id: number
+    id: string
     title: string
     content: string
     deadline: Date
@@ -13,8 +13,9 @@ type Props = {
     todaysAction: boolean
     status: TodoStatus
   }
-  onCheck: (id: number, isChecked: boolean) => void
-  onClick: (id: number) => void
+  onCheck: (id: string, isChecked: boolean) => void
+  onClick: (id: string) => void
+  isChecked?: boolean
 }
 
 function TodoTableItem(props: Props) {
@@ -39,8 +40,11 @@ function TodoTableItem(props: Props) {
     >
       <Primer.Box flex="0 0 auto">
         <Primer.Checkbox
-          value={props.formValue.id.toString()}
-          onChange={(e) => props.onCheck(props.formValue.id, e.target.checked)}
+          checked={props.isChecked}
+          value={props.formValue.id}
+          onChange={(e) => {
+            props.onCheck(props.formValue.id, e.target.checked)
+          }}
         />
       </Primer.Box>
       <Primer.Box
@@ -136,7 +140,7 @@ function TodoTableItem(props: Props) {
             >
               {`Deadline: ${
                 props.formValue.deadline !== undefined
-                  ? format(props.formValue.deadline, 'dd/MM/yyyy')
+                  ? format(new Date(props.formValue.deadline), 'dd/MM/yyyy')
                   : '--'
               }`}
             </Primer.Text>

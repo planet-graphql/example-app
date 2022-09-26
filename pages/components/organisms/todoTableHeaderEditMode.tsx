@@ -56,7 +56,7 @@ function EditModeHeader(props: EditModeHeaderProps) {
         borderColor: '#d8dee4',
       }}
     >
-      <Primer.Header.Item full>1件</Primer.Header.Item>
+      <Primer.Header.Item full>{props.counter} selected</Primer.Header.Item>
       <Primer.Header.Item>
         <ActionList
           title="Status"

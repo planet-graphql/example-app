@@ -4,24 +4,31 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { ItemInput } from '@primer/react/lib/deprecated/ActionList/List'
 import _ from 'lodash'
+import { endOfDay } from 'date-fns'
+import { TypeOfTodoFilter } from '../../../lib/tokens'
 
 type SelectPanelProps = {
   title: string
   items: ItemInput[]
+  values: ItemInput[]
   onSelect: (items: ItemInput[]) => void
+  onClose: () => void
 }
 
 type DefaultModeHeaderProps = {
   counter: number
-  counterpartyList: string[]
-  onStatusFilter: (values: string[]) => void
-  onDeadlineFilter: (value: Date | null) => void
-  onCounterpartyFilter: (values: string[]) => void
-  onTodaysActionFilter: (value: boolean) => void
+  onFilterChange: (filter: TypeOfTodoFilter) => void
 }
 
+const statusFilterItems = [
+  { key: 1, id: 1, text: 'New' },
+  { key: 2, id: 2, text: 'InProgress' },
+  { key: 3, id: 3, text: 'Done' },
+  { key: 4, id: 4, text: 'Pending' },
+]
+const todaysActionFilterItems = [{ key: 5, id: 5, text: 'On' }]
+
 function SelectPanel(props: SelectPanelProps) {
-  const [selected, setSelected] = React.useState<SelectPanelProps['items']>([])
   const [filter, setFilter] = React.useState('')
   const filteredItems = props.items.filter((item) =>
     item.text?.toLowerCase().startsWith(filter.toLowerCase()),
@@ -42,13 +49,13 @@ function SelectPanel(props: SelectPanelProps) {
       )}
       placeholderText="Filter Labels"
       open={open}
-      onOpenChange={setOpen}
-      items={filteredItems}
-      selected={selected}
-      onSelectedChange={(selected: SelectPanelProps['items']) => {
-        setSelected(selected)
-        props.onSelect(selected)
+      onOpenChange={(isOpen) => {
+        setOpen(isOpen)
+        if (!isOpen) props.onClose()
       }}
+      items={filteredItems}
+      selected={props.values}
+      onSelectedChange={props.onSelect}
       onFilterChange={setFilter}
       showItemDividers={true}
       overlayProps={{ width: 'small', height: 'xsmall' }}
@@ -57,7 +64,35 @@ function SelectPanel(props: SelectPanelProps) {
 }
 
 function DefaultModeHeader(props: DefaultModeHeaderProps) {
-  const [selectedDeadline, setSelectedDeadline] = React.useState<Date | null>(null)
+  const [isOpenDeadlineFilter, setIsOpenDeadlineFilter] = React.useState(false)
+
+  const [statusFilter, setStatusFilter] = React.useState<ItemInput[]>(statusFilterItems)
+  const [deadlineFilter, setDeadlineFilter] = React.useState<Date | null>(null)
+  const [counterpartyFilter, setCounterpartyFilter] = React.useState<string>('')
+  const [todaysActionFilter, setTodaysActionFilter] = React.useState<ItemInput[]>([])
+
+  const queryVariables: TypeOfTodoFilter = {
+    status: { in: statusFilter?.map((x) => x.text ?? '') },
+    ...(deadlineFilter !== null
+      ? {
+          deadline: {
+            gte: deadlineFilter,
+            lte: endOfDay(new Date(deadlineFilter)),
+          },
+        }
+      : {
+          deadline: undefined,
+        }),
+    counterparty: { contains: counterpartyFilter },
+    ...(todaysActionFilter.length > 0 && todaysActionFilter[0].text === 'On'
+      ? {
+          todaysAction: true,
+        }
+      : {
+          todaysAction: undefined,
+        }),
+  }
+
   return (
     <Primer.Header
       sx={{
@@ -69,61 +104,98 @@ function DefaultModeHeader(props: DefaultModeHeaderProps) {
         borderColor: '#d8dee4',
       }}
     >
-      <Primer.Header.Item full>{props.counter}件</Primer.Header.Item>
+      <Primer.Header.Item full>{props.counter} todos</Primer.Header.Item>
       <Primer.Box display="flex" flexWrap="wrap">
         <Primer.Header.Item>
           <SelectPanel
             title="Status"
-            items={[
-              { id: 1, text: 'New' },
-              { id: 2, text: 'InProgress' },
-              { id: 3, text: 'Done' },
-              { id: 4, text: 'Pending' },
-            ]}
-            onSelect={(items) => {
-              const selected = _.compact(items.map((item) => item.text))
-              props.onStatusFilter(selected)
+            items={statusFilterItems}
+            values={statusFilter}
+            onSelect={(values) => {
+              setStatusFilter(values)
             }}
+            onClose={() => props.onFilterChange(queryVariables)}
           />
         </Primer.Header.Item>
         <Primer.Header.Item>
-          <Primer.ActionMenu>
-            <DatePicker
-              selected={selectedDeadline}
-              isClearable
-              onChange={(value) => {
-                setSelectedDeadline(value)
-                props.onDeadlineFilter(value)
-              }}
-              customInput={
-                <Primer.ActionMenu.Button
-                  variant="invisible"
-                  sx={{ color: 'btn.text', fontWeight: 'normal' }}
+          <Primer.ActionMenu
+            open={isOpenDeadlineFilter}
+            onOpenChange={(isOpen) => {
+              setIsOpenDeadlineFilter(isOpen)
+              if (!isOpen) props.onFilterChange(queryVariables)
+            }}
+          >
+            <Primer.ActionMenu.Button
+              variant="invisible"
+              sx={{ color: 'btn.text', fontWeight: 'normal' }}
+            >
+              Deadline
+            </Primer.ActionMenu.Button>
+            <Primer.ActionMenu.Overlay>
+              <Primer.Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                padding={2}
+              >
+                <DatePicker
+                  selected={deadlineFilter}
+                  inline
+                  onChange={(value) => {
+                    setDeadlineFilter(value)
+                  }}
+                ></DatePicker>
+                <Primer.Box
+                  onClick={() => {
+                    setIsOpenDeadlineFilter(false)
+                    setDeadlineFilter(null)
+                    props.onFilterChange({
+                      ...queryVariables,
+                      deadline: undefined,
+                    })
+                  }}
                 >
-                  Deadline
-                </Primer.ActionMenu.Button>
+                  <Primer.Button>Clear</Primer.Button>
+                </Primer.Box>
+              </Primer.Box>
+            </Primer.ActionMenu.Overlay>
+          </Primer.ActionMenu>
+        </Primer.Header.Item>
+        <Primer.Header.Item>
+          <Primer.ActionMenu
+            onOpenChange={(isOpen) => {
+              if (!isOpen) {
+                props.onFilterChange(queryVariables)
               }
-            ></DatePicker>
+            }}
+          >
+            <Primer.ActionMenu.Button
+              variant="invisible"
+              sx={{ color: 'btn.text', fontWeight: 'normal' }}
+            >
+              Counterparty
+            </Primer.ActionMenu.Button>
+            <Primer.ActionMenu.Overlay>
+              <Primer.Box padding={2}>
+                <Primer.TextInput
+                  defaultValue={counterpartyFilter}
+                  onChange={(e) => {
+                    setCounterpartyFilter(e.target.value)
+                  }}
+                />
+              </Primer.Box>
+            </Primer.ActionMenu.Overlay>
           </Primer.ActionMenu>
         </Primer.Header.Item>
         <Primer.Header.Item>
           <SelectPanel
-            title="Counterparty"
-            items={props.counterpartyList.map((x, id) => ({ id, text: x }))}
-            onSelect={(items) => {
-              const selected = _.compact(items.map((item) => item.text))
-              props.onCounterpartyFilter(selected)
-            }}
-          />
-        </Primer.Header.Item>
-        <Primer.Header.Item>
-          <SelectPanel
             title="Today's Action"
-            items={[{ id: 1, text: 'On' }]}
-            onSelect={(items) => {
-              const selected = items.length > 0 && items[0].text === 'On'
-              props.onTodaysActionFilter(selected)
+            items={todaysActionFilterItems}
+            values={todaysActionFilter}
+            onSelect={(values) => {
+              setTodaysActionFilter(values)
             }}
+            onClose={() => props.onFilterChange(queryVariables)}
           />
         </Primer.Header.Item>
       </Primer.Box>
