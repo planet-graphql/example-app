@@ -1,6 +1,6 @@
 import ThirdPartyNode from 'supertokens-node/recipe/thirdparty'
 import SessionNode from 'supertokens-node/recipe/session'
-import { appInfo, websiteDomain } from './appInfo'
+import { appInfo } from './appInfo'
 
 export let backendConfig = () => {
   return {

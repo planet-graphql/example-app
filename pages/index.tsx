@@ -1,9 +1,5 @@
-import type { GetServerSideProps, NextPage } from 'next'
 import * as Primer from '@primer/react'
 import React from 'react'
-import supertokensNode from 'supertokens-node'
-import { backendConfig } from '../config/backendConfig'
-import Session from 'supertokens-node/recipe/session'
 import PageFrame from '../components/layouts/pageFrame'
 import { useMutation, useQuery } from '@apollo/client'
 import {
@@ -18,25 +14,6 @@ import {
 } from '../lib/queries'
 import CreateTodoDialog from '../components/organisms/createTodoDialog'
 import TodoTable from '../components/organisms/todoTable'
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  supertokensNode.init(backendConfig())
-  let session
-  try {
-    session = await Session.getSession(context.req, context.res)
-  } catch (err: any) {
-    if (err.type === Session.Error.TRY_REFRESH_TOKEN) {
-      return { props: { fromSupertokens: 'needs-refresh' } }
-    } else if (err.type === Session.Error.UNAUTHORISED) {
-      return { props: {} }
-    } else {
-      throw err
-    }
-  }
-  return {
-    props: { userId: session.getUserId() },
-  }
-}
 
 function Todo() {
   const { data, loading, refetch } = useQuery<QueryTodosResponse>(QueryTodos, {
