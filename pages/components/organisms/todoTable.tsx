@@ -3,11 +3,11 @@ import * as Primer from '@primer/react'
 import DefaultModeHeader from './todoTableHeaderDefaultMode'
 import TodoTableItem from './todoTableItem'
 import { useRouter } from 'next/router'
-import { TodoStatus } from '../../../lib/tokens'
+import { TodoStatus, TypeOfTodoFilter } from '../../../lib/tokens'
 import EditModeHeader from './todoTableHeaderEditMode'
 
 type Todo = {
-  id: number
+  id: string
   title: string
   content: string
   deadline: Date
@@ -18,42 +18,45 @@ type Todo = {
 
 type Props = {
   todos: Todo[]
-  onStatusFilter: (values: string[]) => void
-  onDeadlineFilter: (value: Date | null) => void
-  onCounterpartyFilter: (values: string[]) => void
-  onTodaysActionFilter: (value: boolean) => void
+  onFilterChange: (filter: TypeOfTodoFilter) => void
   onEditSelect: (
-    ids: number[],
+    ids: string[],
     value: {
       deadline?: Date
       todaysAction?: boolean
       status?: TodoStatus
     },
   ) => void
-  onDelete: (ids: number[]) => void
+  onDelete: (ids: string[]) => void
 }
 
 function TodoTable(props: Props) {
   const router = useRouter()
   const [editMode, setEditMode] = React.useState(false)
-  const checkedIds = React.useRef<number[]>([])
+  const [checkedIds, setCheckedIds] = React.useState<string[]>([])
+
+  React.useEffect(() => {
+    setEditMode(checkedIds.length > 0)
+  }, [checkedIds])
 
   return (
     <Primer.Box>
       {editMode ? (
         <EditModeHeader
-          counter={checkedIds.current.length}
-          onSelect={(value) => props.onEditSelect(checkedIds.current, value)}
-          onDelete={() => props.onDelete(checkedIds.current)}
+          counter={checkedIds.length}
+          onSelect={(value) => {
+            props.onEditSelect(checkedIds, value)
+            setCheckedIds([])
+          }}
+          onDelete={() => {
+            props.onDelete(checkedIds)
+            setCheckedIds([])
+          }}
         />
       ) : (
         <DefaultModeHeader
           counter={props.todos.length}
-          counterpartyList={props.todos.map((x) => x.counterparty)}
-          onDeadlineFilter={props.onDeadlineFilter}
-          onStatusFilter={props.onStatusFilter}
-          onCounterpartyFilter={props.onCounterpartyFilter}
-          onTodaysActionFilter={props.onTodaysActionFilter}
+          onFilterChange={props.onFilterChange}
         />
       )}
       {props.todos.map((x) => (
@@ -61,13 +64,12 @@ function TodoTable(props: Props) {
           key={x.id}
           formValue={x}
           onCheck={(id, isChecked) => {
-            if (!isChecked)
-              checkedIds.current = checkedIds.current.filter((x) => x !== id)
-            if (isChecked && checkedIds.current.find((x) => x === id) === undefined)
-              checkedIds.current.push(id)
-            setEditMode(checkedIds.current.length > 0)
+            if (!isChecked) setCheckedIds(checkedIds.filter((x) => x !== id))
+            if (isChecked && checkedIds.find((x) => x === id) === undefined)
+              setCheckedIds([...checkedIds, id])
           }}
           onClick={(id) => router.push(`${router.asPath}/${id}`)}
+          isChecked={checkedIds.includes(x.id)}
         ></TodoTableItem>
       ))}
     </Primer.Box>
