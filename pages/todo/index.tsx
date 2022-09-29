@@ -1,3 +1,5 @@
+import React from 'react'
+import * as Primer from '@primer/react'
 import { useMutation, useQuery } from '@apollo/client'
 import {
   QueryTodosResponse,
@@ -6,14 +8,19 @@ import {
   MutationDeleteManyTodo,
   MutationUpdateManyTodo,
   MutationUpdateManyTodoResponse,
+  MutationCreateTodo,
+  MutationCreateTodoResponse,
 } from '../../lib/queries'
 import PageFrame from '../components/layouts/pageFrame'
+import CreateTodoDialog from '../components/organisms/createTodoDialog'
 import TodoTable from '../components/organisms/todoTable'
 
 function Todo() {
   const { data, loading, refetch } = useQuery<QueryTodosResponse>(QueryTodos, {
     fetchPolicy: 'network-only',
   })
+
+  const [createTodo] = useMutation<MutationCreateTodoResponse>(MutationCreateTodo)
 
   const [updateManyTodo] =
     useMutation<MutationUpdateManyTodoResponse>(MutationUpdateManyTodo)
@@ -26,6 +33,16 @@ function Todo() {
 
   return (
     <PageFrame>
+      <Primer.Box display="flex" justifyContent="space-between">
+        <Primer.Box></Primer.Box>
+        <CreateTodoDialog
+          onCreate={async (value) => {
+            await createTodo({ variables: { input: value } })
+            await refetch()
+          }}
+        />
+      </Primer.Box>
+      <Primer.Box marginY={2}></Primer.Box>
       <TodoTable
         todos={data?.todos ?? []}
         onFilterChange={async (value) => {
