@@ -13,14 +13,15 @@ async function logoutClicked() {
   ThirdParty.redirectToAuth()
 }
 
+const PageLayout = Primer.PageLayout as ReactFCWrapper<typeof Primer.PageLayout>
+const PageLayoutHeader = Primer.PageLayout.Header as ReactFCWrapper<
+  typeof Primer.PageLayout.Header
+>
+const PageLayoutContent = Primer.PageLayout.Content as ReactFCWrapper<
+  typeof Primer.PageLayout.Content
+>
+
 function PageFrame(props: Props) {
-  const PageLayout = Primer.PageLayout as ReactFCWrapper<typeof Primer.PageLayout>
-  const PageLayoutHeader = Primer.PageLayout.Header as ReactFCWrapper<
-    typeof Primer.PageLayout.Header
-  >
-  const PageLayoutContent = Primer.PageLayout.Content as ReactFCWrapper<
-    typeof Primer.PageLayout.Content
-  >
   return (
     <ThirdPartyAuth>
       <PageLayout>

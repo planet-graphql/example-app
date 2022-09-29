@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import * as Primer from '@primer/react'
 import { format } from 'date-fns'
 import { TodoStatus } from '../../../lib/tokens'
