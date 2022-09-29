@@ -26,11 +26,7 @@ function PageFrame(props: Props) {
     <ThirdPartyAuth>
       <PageLayout>
         <PageLayoutHeader>
-          <Header
-            topPath="/"
-            logOutPath="/login"
-            onLogout={() => logoutClicked()}
-          ></Header>
+          <Header topPath="/" onLogout={() => logoutClicked()}></Header>
         </PageLayoutHeader>
         <PageLayoutContent sx={{ paddingX: 3 }}>{props.children}</PageLayoutContent>
       </PageLayout>
