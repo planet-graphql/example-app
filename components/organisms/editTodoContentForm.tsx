@@ -2,9 +2,9 @@ import React from 'react'
 import * as Primer from '@primer/react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { ReactFCWrapper } from '../../_app'
+import { ReactFCWrapper } from '../../pages/_app'
 import EditTodoButtonGroup from './editTodoButtonGroup'
-import { FormValue, todoStatus, TodoStatus } from '../../../lib/tokens'
+import { FormValue, todoStatus, TodoStatus } from '../../lib/tokens'
 
 type Props = {
   formValue: FormValue

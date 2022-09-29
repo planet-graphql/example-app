@@ -6,7 +6,7 @@ import { ThirdPartyAuth } from 'supertokens-auth-react/recipe/thirdparty'
 import supertokensNode from 'supertokens-node'
 import { backendConfig } from '../config/backendConfig'
 import Session from 'supertokens-node/recipe/session'
-import PageFrame from './components/layouts/pageFrame'
+import PageFrame from '../components/layouts/pageFrame'
 import { useSessionContext } from 'supertokens-auth-react/recipe/session'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

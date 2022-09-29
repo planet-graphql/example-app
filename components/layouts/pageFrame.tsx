@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Primer from '@primer/react'
-import { ReactFCWrapper } from '../../_app'
+import { ReactFCWrapper } from '../../pages/_app'
 import Header from '../organisms/header'
 import ThirdParty, { ThirdPartyAuth } from 'supertokens-auth-react/recipe/thirdparty'
 

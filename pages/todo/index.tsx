@@ -11,9 +11,9 @@ import {
   MutationCreateTodo,
   MutationCreateTodoResponse,
 } from '../../lib/queries'
-import PageFrame from '../components/layouts/pageFrame'
-import CreateTodoDialog from '../components/organisms/createTodoDialog'
-import TodoTable from '../components/organisms/todoTable'
+import PageFrame from '../../components/layouts/pageFrame'
+import CreateTodoDialog from '../../components/organisms/createTodoDialog'
+import TodoTable from '../../components/organisms/todoTable'
 
 function Todo() {
   const { data, loading, refetch } = useQuery<QueryTodosResponse>(QueryTodos, {

@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { ItemInput } from '@primer/react/lib/deprecated/ActionList/List'
 import { endOfDay } from 'date-fns'
-import { TypeOfTodoFilter } from '../../../lib/tokens'
+import { TypeOfTodoFilter } from '../../lib/tokens'
 
 type SelectPanelProps = {
   title: string

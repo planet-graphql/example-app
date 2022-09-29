@@ -1,6 +1,6 @@
 import React from 'react'
-import PageFrame from '../../components/layouts/pageFrame'
-import DetailTodoContent from '../../components/organisms/detailTodoContent'
+import PageFrame from '../../../components/layouts/pageFrame'
+import DetailTodoContent from '../../../components/organisms/detailTodoContent'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { QueryTodoResponse, QueryTodo } from '../../../lib/queries'

@@ -11,8 +11,8 @@ import {
   MutationDeleteTodo,
 } from '../../../lib/queries'
 import { FormValue } from '../../../lib/tokens'
-import PageFrame from '../../components/layouts/pageFrame'
-import EditTodoContentForm from '../../components/organisms/editTodoContentForm'
+import PageFrame from '../../../components/layouts/pageFrame'
+import EditTodoContentForm from '../../../components/organisms/editTodoContentForm'
 
 function Edit() {
   const router = useRouter()
