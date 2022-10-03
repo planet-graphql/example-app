@@ -9,7 +9,7 @@ import {
   MutationUpdateTodo,
   MutationDeleteTodoResponse,
   MutationDeleteTodo,
-} from '../../lib/queries'
+} from '../../utils/queries'
 import PageFrame from '../../components/layouts/pageFrame'
 import EditTodoContentForm from '../../components/organisms/editTodoContentForm'
 

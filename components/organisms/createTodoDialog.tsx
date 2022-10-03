@@ -1,7 +1,7 @@
 import React from 'react'
 import * as Primer from '@primer/react'
 import CreateTodoContentForm from './createTodoContentForm'
-import { FormValue } from '../../lib/tokens'
+import { FormValue } from '../utils'
 
 type Props = {
   onCreate: (formValue: FormValue) => void

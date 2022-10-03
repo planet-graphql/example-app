@@ -1,7 +1,7 @@
 import { superTokensNextWrapper } from 'supertokens-node/nextjs'
 import supertokens from 'supertokens-node'
 import { middleware } from 'supertokens-node/framework/express'
-import { backendConfig } from '../../../config/supertokens/backendConfig'
+import { backendConfig } from '../../../utils/supertokens/backendConfig'
 
 supertokens.init(backendConfig())
 

@@ -11,7 +11,7 @@ import {
   MutationUpdateManyTodoResponse,
   MutationCreateTodo,
   MutationCreateTodoResponse,
-} from '../lib/queries'
+} from '../utils/queries'
 import CreateTodoDialog from '../components/organisms/createTodoDialog'
 import TodoTable from '../components/organisms/todoTable'
 

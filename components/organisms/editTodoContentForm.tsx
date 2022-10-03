@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { ReactFCWrapper } from '../../pages/_app'
 import EditTodoButtonGroup from './editTodoButtonGroup'
-import { FormValue, todoStatus, TodoStatus } from '../../lib/tokens'
+import { FormValue, todoStatus, TodoStatus } from '../utils'
 
 type Props = {
   formValue: FormValue

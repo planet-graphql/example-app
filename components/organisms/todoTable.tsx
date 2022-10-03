@@ -3,7 +3,7 @@ import * as Primer from '@primer/react'
 import DefaultModeHeader from './todoTableHeaderDefaultMode'
 import TodoTableItem from './todoTableItem'
 import { useRouter } from 'next/router'
-import { TodoStatus, TypeOfTodoFilter } from '../../lib/tokens'
+import { TodoStatus, TypeOfTodoFilter } from '../utils'
 import EditModeHeader from './todoTableHeaderEditMode'
 
 type Todo = {

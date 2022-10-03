@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Primer from '@primer/react'
-import { FormValue, TodoStatus, todoStatus } from '../../lib/tokens'
+import { FormValue, TodoStatus, todoStatus } from '../utils'
 import CreateTodoButtonGroup from './createTodoButtonGroup'
 import { ReactFCWrapper } from '../../pages/_app'
 import DatePicker from 'react-datepicker'
