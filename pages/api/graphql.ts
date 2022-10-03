@@ -1,12 +1,12 @@
 import { superTokensNextWrapper } from 'supertokens-node/nextjs'
 import { verifySession } from 'supertokens-node/recipe/session/framework/express'
 import supertokens from 'supertokens-node'
-import { backendConfig } from '../../config/supertokens/backendConfig'
+import { backendConfig } from '../../utils/supertokens/backendConfig'
 import { SessionRequest } from 'supertokens-node/framework/express'
 import type { Response } from 'express'
 import { createServer } from '@graphql-yoga/node'
 import { PrismaClient } from '@prisma/client'
-import { pg, pgpc } from '../../graphql/builder'
+import { pg, pgpc } from '../../api/builder'
 import {
   createTodoMutation,
   deleteManyTodoMutation,
@@ -15,7 +15,7 @@ import {
   todosQuery,
   updateManyTodoMutation,
   updateTodoMutation,
-} from '../../graphql/resolver/todo-resolver'
+} from '../../api/resolver/todo-resolver'
 import ThirdParty from 'supertokens-node/recipe/thirdparty'
 
 export type Context = {

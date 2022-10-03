@@ -2,7 +2,7 @@ import React from 'react'
 import * as Primer from '@primer/react'
 import { format } from 'date-fns'
 import DetailTodoButtonGroup from './detailTodoButtonGroup'
-import { FormValue } from '../../lib/tokens'
+import { FormValue } from '../utils'
 
 type Props = {
   values: FormValue

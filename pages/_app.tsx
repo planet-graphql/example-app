@@ -3,7 +3,7 @@ import * as Primer from '@primer/react'
 import SuperTokensReact, { SuperTokensWrapper } from 'supertokens-auth-react'
 import React from 'react'
 import { redirectToAuth } from 'supertokens-auth-react/recipe/thirdparty'
-import * as SuperTokensConfig from '../config/supertokens/frontendConfig'
+import * as SuperTokensConfig from '../utils/supertokens/frontendConfig'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { useRouter } from 'next/router'
 
