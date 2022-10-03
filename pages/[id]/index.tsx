@@ -3,7 +3,7 @@ import PageFrame from '../../components/layouts/pageFrame'
 import DetailTodoContent from '../../components/organisms/detailTodoContent'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { QueryTodoResponse, QueryTodo } from '../../../lib/queries'
+import { QueryTodoResponse, QueryTodo } from '../../lib/queries'
 
 function Detail() {
   const router = useRouter()
@@ -25,7 +25,7 @@ function Detail() {
           router.push(`${router.asPath}/edit`)
         }}
         onBack={() => {
-          router.push('/todo')
+          router.push('/')
         }}
       ></DetailTodoContent>
     </PageFrame>

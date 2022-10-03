@@ -3,9 +3,8 @@ import * as Primer from '@primer/react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { ItemInput } from '@primer/react/lib/deprecated/ActionList/List'
-import _ from 'lodash'
 import { endOfDay } from 'date-fns'
-import { TypeOfTodoFilter } from '../../../lib/tokens'
+import { TypeOfTodoFilter } from '../../lib/tokens'
 
 type SelectPanelProps = {
   title: string
@@ -21,12 +20,12 @@ type DefaultModeHeaderProps = {
 }
 
 const statusFilterItems = [
-  { key: 1, id: 1, text: 'New' },
-  { key: 2, id: 2, text: 'InProgress' },
-  { key: 3, id: 3, text: 'Done' },
-  { key: 4, id: 4, text: 'Pending' },
+  { id: 1, text: 'New' },
+  { id: 2, text: 'InProgress' },
+  { id: 3, text: 'Done' },
+  { id: 4, text: 'Pending' },
 ]
-const todaysActionFilterItems = [{ key: 5, id: 5, text: 'On' }]
+const todaysActionFilterItems = [{ id: 1, text: 'On' }]
 
 function SelectPanel(props: SelectPanelProps) {
   const [filter, setFilter] = React.useState('')

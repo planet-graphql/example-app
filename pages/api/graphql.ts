@@ -1,7 +1,7 @@
 import { superTokensNextWrapper } from 'supertokens-node/nextjs'
 import { verifySession } from 'supertokens-node/recipe/session/framework/express'
 import supertokens from 'supertokens-node'
-import { backendConfig } from '../../config/backendConfig'
+import { backendConfig } from '../../config/supertokens/backendConfig'
 import { SessionRequest } from 'supertokens-node/framework/express'
 import type { Response } from 'express'
 import { createServer } from '@graphql-yoga/node'

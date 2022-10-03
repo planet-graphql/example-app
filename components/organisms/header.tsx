@@ -3,7 +3,6 @@ import * as Primer from '@primer/react'
 
 type Props = {
   topPath: string
-  logOutPath: string
   onLogout: () => void
 }
 

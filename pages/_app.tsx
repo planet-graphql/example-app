@@ -2,9 +2,8 @@ import type { AppProps } from 'next/app'
 import * as Primer from '@primer/react'
 import SuperTokensReact, { SuperTokensWrapper } from 'supertokens-auth-react'
 import React from 'react'
-import Session from 'supertokens-auth-react/recipe/session'
 import { redirectToAuth } from 'supertokens-auth-react/recipe/thirdparty'
-import * as SuperTokensConfig from '../config/frontendConfig'
+import * as SuperTokensConfig from '../config/supertokens/frontendConfig'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { useRouter } from 'next/router'
 
@@ -28,29 +27,9 @@ export const client = new ApolloClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  React.useEffect(() => {
-    async function doRefresh() {
-      if (pageProps.fromSupertokens === 'needs-refresh') {
-        if (await Session.attemptRefreshingSession()) {
-          location.reload()
-        } else {
-          redirectToAuth()
-        }
-      }
-    }
-    doRefresh()
-  }, [pageProps.fromSupertokens])
-
-  if (pageProps.fromSupertokens === 'needs-refresh') {
-    return null
-  }
 
   return (
-    <SuperTokensWrapper
-      onSessionExpired={() => {
-        router.push('/')
-      }}
-    >
+    <SuperTokensWrapper onSessionExpired={() => redirectToAuth()}>
       <ApolloProvider client={client}>
         <Primer.SSRProvider>
           <ThemeProvider>

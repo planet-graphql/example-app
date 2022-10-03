@@ -2,7 +2,7 @@ import React from 'react'
 import * as Primer from '@primer/react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { TodoStatus } from '../../../lib/tokens'
+import { TodoStatus } from '../../lib/tokens'
 
 type ActionListProps = {
   title: string

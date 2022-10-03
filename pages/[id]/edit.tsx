@@ -9,8 +9,7 @@ import {
   MutationUpdateTodo,
   MutationDeleteTodoResponse,
   MutationDeleteTodo,
-} from '../../../lib/queries'
-import { FormValue } from '../../../lib/tokens'
+} from '../../lib/queries'
 import PageFrame from '../../components/layouts/pageFrame'
 import EditTodoContentForm from '../../components/organisms/editTodoContentForm'
 
@@ -42,14 +41,14 @@ function Edit() {
         ])}
         onUpdate={async (value) => {
           await updateTodo({ variables: { id, input: value } })
-          router.push(`/todo/${id}`)
+          router.push(`/${id}`)
         }}
         onCancel={() => {
-          router.push(`/todo/${id}`)
+          router.push(`/${id}`)
         }}
         onDelete={async () => {
           await deleteTodo({ variables: { id } })
-          router.push(`/todo`)
+          router.push(`/`)
         }}
       ></EditTodoContentForm>
     </PageFrame>
